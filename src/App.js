@@ -7,22 +7,27 @@ class App extends Component {
     super(props);
     this.state = {isConnected: false};
     this.init = this.init.bind(this)
-    this.web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
+    this.HandleClick= this.HandleClick.bind(this)
+    
   }
   componentWillMount() {
-    if (typeof web3 !== 'undefined') {
-      // If a web3 instance is already provided by Meta Mask.
     
-      this.setState({isConnected: true});
-      
-    } else {
-      // Specify default instance if no web3 instance provided
-      this.setState({isConnected: false});
-    }
     this.init()
  
   }
+  HandleClick(e){
+    this.preventdefault();
+    
+
+  }
   async init() {
+    if (typeof window.web3 !== 'undefined') {
+      // If a web3 instance is already provided by Meta Mask.
+      window.alert("MetamASK INSTALLE")
+    } else {
+      // Specify default instance if no web3 instance provided
+      window.alert("MetamASK NOT INSTALLE .installl from https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en")
+    }
     try {
       const accounts = await ethereum.enable();
       // You now have an array of accounts!
@@ -32,7 +37,7 @@ class App extends Component {
       // Handle error. Likely the user rejected the login:
       return (
         <div>
-          <h2>Install Metamask on https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en</h2>
+          <h2>Install Metamask on</h2>
         </div>
       )
       
@@ -41,7 +46,7 @@ class App extends Component {
   render() {
     return (
       <div>
-         <Button variant="outline-primary">Primary</Button>
+         <Button variant="outline-primary" onClick={(e) => this.HandleClick(e)}> Primary</Button>
         <h2>Is connected?:</h2><br/>
         {this.state.isConnected?'Connected to local node':'Not Connected'}
       </div>
