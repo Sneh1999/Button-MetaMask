@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Fragment } from 'react'
-import logo from './logo.svg';
 import Web3 from 'web3';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal'
@@ -20,7 +19,8 @@ class App extends Component {
     this.state = {
       show: false,
       isMetaMask: false,
-      isLoginMetaMask:false
+      isLoginMetaMask:false,
+      isDesiredNetwork:false
     };
   }
 
@@ -43,6 +43,7 @@ class App extends Component {
   async init(){
     try {
       const accounts = await window.ethereum.enable()
+      this.setState({isDesiredNetwork:true})
       // You now have an array of accounts!
       // Currently only ever one:
       // ['0xFDEa65C8e26263F6d9A1B5de9555D2931A33b825']
@@ -80,7 +81,13 @@ class App extends Component {
       </p>
     </Fragment>
     }
-
+    if(this.state.isDesiredNetwork){
+      content = <Fragment>
+      <p>Connect to the right network
+        <br />
+      </p>
+    </Fragment>
+    }
     console.log(content)
     return (
       <>
