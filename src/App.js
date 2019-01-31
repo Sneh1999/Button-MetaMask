@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import { Fragment } from 'react'
 import Web3 from 'web3';
@@ -13,6 +14,8 @@ class App extends Component {
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.network = this.network.bind(this)
+
     this.init= this.init.bind(this);
 
 
@@ -44,6 +47,7 @@ class App extends Component {
     try {
       const accounts = await window.ethereum.enable()
       this.setState({isDesiredNetwork:true})
+      this.network()
       // You now have an array of accounts!
       // Currently only ever one:
       // ['0xFDEa65C8e26263F6d9A1B5de9555D2931A33b825']
@@ -53,6 +57,35 @@ class App extends Component {
       
     }
   }
+  network(){
+    let web3;
+    console.log("here2")
+    
+    // If a web3 instance is already provided by Meta Mask.
+      if (window.ethereum.networkVersion === "3") {
+      //  this.setState({isDesiredNetwork:false})
+       console.log("here3")
+      } else {
+        //  var desiredNetwork = "3"
+        window.ethereum.on('networkChanged', function (accounts) {
+          console.log("Hello")
+          if(window.ethereum.networkVersion === "3"){
+            window.alert("correct netwrok")
+          }
+          else{
+            window.alert("connect to ropsten")
+          }
+          // Time to reload your interface with accounts[0]!
+        })
+        //   function checkNetwork (err, currentNetwork) {
+      
+        // console.log("Hello")
+       
+       
+      }
+
+    }
+
 
   handleClose() {
     this.setState({ show: false });
