@@ -15,6 +15,7 @@ class App extends Component {
     this.handleClose = this.handleClose.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.network = this.network.bind(this)
+    this.mount = this.mount.bind(this)
 
     this.init= this.init.bind(this);
 
@@ -27,10 +28,10 @@ class App extends Component {
     };
   }
 
-  componentDidMount(){
+    mount(){
     if (typeof web3 !== 'undefined') {
       // If a web3 instance is already provided by Meta Mask.
-      this.setState({isLoginMetaMask:true})
+      this.init()
      
     } else {
       // Specify default instance if no web3 instance provided
@@ -75,12 +76,9 @@ class App extends Component {
           else{
             window.alert("connect to ropsten")
           }
-          // Time to reload your interface with accounts[0]!
+          
         })
-        //   function checkNetwork (err, currentNetwork) {
       
-        // console.log("Hello")
-       
        
       }
 
@@ -93,6 +91,7 @@ class App extends Component {
 
   handleShow() {
     this.setState({ show: true });
+    this.mount()
   }
 
   render() {
