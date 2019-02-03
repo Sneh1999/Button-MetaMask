@@ -8,13 +8,14 @@ export default class isLoginMetaMask extends Component{
     constructor(props){
         super(props)
     }
+    
     render(){
         return(
             <div>
                 <p>Login into MetaMask
             <br />
-            <Button onClick={(e) =>this.handleClick(e)} variant="primary">Log In!</Button>
-            
+            <Button onClick={(e) =>this.handleClick(e)}variant="primary">Primary</Button>
+           
           </p>
             </div>
           

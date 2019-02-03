@@ -2,9 +2,11 @@
 import React, { Component } from 'react';
 import { Fragment } from 'react'
 import Web3 from 'web3';
+import isLoginMetaMask from './components/isLoginMetaMask'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal'
 import './App.css';
+import { resolve } from 'url';
 
 class App extends Component {
 
@@ -24,7 +26,8 @@ class App extends Component {
       show: false,
       isMetaMask: false,
       isLoginMetaMask:false,
-      isDesiredNetwork:false
+      isDesiredNetwork:false,
+      isLogin:false
     };
   }
 
@@ -60,29 +63,30 @@ class App extends Component {
   }
   network(){
     let web3;
-    console.log("here2")
     
     // If a web3 instance is already provided by Meta Mask.
       if (window.ethereum.networkVersion === "3") {
-      //  this.setState({isDesiredNetwork:false})
-       console.log("here3")
+        this.setState({isLogin:true})
       } else {
-        //  var desiredNetwork = "3"
-        window.ethereum.on('networkChanged', function (accounts) {
-          console.log("Hello")
-          if(window.ethereum.networkVersion === "3"){
-            window.alert("correct netwrok")
-          }
-          else{
-            window.alert("connect to ropsten")
-          }
+        
+          var desiredNetwork = "3"
+          window.ethereum.on('networkChanged', (accounts) =>{
+            console.log(accounts)
+            if(accounts==="3"){
+              this.setState({isLogin:true})
+            }
+            else{
+              this.setState({isLogin:false})
+              this.setState({isDesiredNetwork:true})
+            }
+          })
+            
           
-        })
-      
-       
-      }
+        
+}
 
     }
+  
 
 
   handleClose() {
@@ -106,12 +110,7 @@ class App extends Component {
 
     }
     if(this.state.isLoginMetaMask){
-      content = <Fragment>
-      <p>Login into MetaMask
-        <br />
-        <button onClick={(e) =>this.handleClick(e)} >Log In!</button>
-      </p>
-    </Fragment>
+      content = <isLoginMetaMask />
     }
     if(this.state.isDesiredNetwork){
       content = <Fragment>
@@ -120,7 +119,14 @@ class App extends Component {
       </p>
     </Fragment>
     }
-    console.log(content)
+    if(this.state.isLogin){
+      content = <Fragment>
+      <p>Login in into your account
+        <br />
+      </p>
+    </Fragment>
+    }
+    // console.log(content)
     return (
       <>
         <Button variant="primary" onClick={this.handleShow}>
