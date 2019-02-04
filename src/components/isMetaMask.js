@@ -12,9 +12,8 @@ export default class isMetaMask extends Component{
     render(){
         return(
             <div>
-                <p>We see that you dont have MetaMask installed ,please install it using this link
-                 <br />
-            <a href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en" target="_blank">Download MetaMask</a>
+                <p>Install MetaMask to Sign in
+                
                 </p>
             </div>
         )

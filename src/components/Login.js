@@ -12,7 +12,7 @@ export default class Login extends Component{
     render(){
         return(
             <div>
-              <p>Login in into your account now
+              <p>Sign in into your account now
         <br />
       </p>
             </div>

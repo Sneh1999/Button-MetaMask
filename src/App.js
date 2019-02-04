@@ -8,6 +8,9 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal'
 import './App.css';
 import { resolve } from 'url';
+var detect = require('detect-browser').detect
+
+var isMobile;
 
 class App extends Component {
 
@@ -36,14 +39,65 @@ class App extends Component {
     mount(){
     if (typeof web3 !== 'undefined') {
       // If a web3 instance is already provided by Meta Mask.
+      this.setState({isMetaMask:false})
       this.init()
      
     } else {
       // Specify default instance if no web3 instance provided
      
-      this.setState({ isMetaMask: true });
+        const browser = detect()
+      
+        // Touch the web3 object to trigger Brave install prompt
+       
+        isMobile = !!detectMobile()
 
-    }
+        function detectMobile() {
+          return (
+              navigator.userAgent.match(/Android/i)
+           || navigator.userAgent.match(/webOS/i)
+           || navigator.userAgent.match(/iPhone/i)
+           || navigator.userAgent.match(/iPad/i)
+           || navigator.userAgent.match(/iPod/i)
+           || navigator.userAgent.match(/BlackBerry/i)
+           || navigator.userAgent.match(/Windows Phone/i)
+          )
+        }
+        if(!isMobile){
+          switch (browser.name) {
+      
+            case 'firefox':
+              window.open('https://addons.mozilla.org/en-US/firefox/addon/ether-metamask/','_blank')
+             
+        
+              break
+            
+              case 'chrome':
+               window.open('https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en','_blank')
+        
+            case 'opera':
+              window.open('https://addons.opera.com/en/extensions/details/metamask/','_blank')
+              
+              break
+            
+             
+  
+            
+        
+          }
+
+        }
+       
+        this.setState({ isMetaMask: true });
+
+        
+
+        console.log(isMobile)
+        
+      }
+      
+      
+
+    
    
   }
   handleClick(e){
@@ -53,12 +107,13 @@ class App extends Component {
   async init(){
     try {
       const accounts = await window.ethereum.enable()
-      this.setState({isDesiredNetwork:true})
+      this.setState({isDesiredNetwork:true,
+      isMetaMask:false})
       this.network()
     
     } catch (error) {
       
-      this.setState({isLoginMetaMask:true})
+      this.setState({isLoginMetaMask:true,isMetaMask:false})
       
     }
     window.ethereum.on('accountsChanged',(accounts) => {
@@ -135,6 +190,11 @@ class App extends Component {
     if(this.state.isLogin){
       content = <MyComponent tag='doo' ></MyComponent>
     }
+    if(isMobile){
+      content = <Fragment>
+        Mobile coming soon!
+      </Fragment>
+    }
     
     return (
       <>
@@ -153,7 +213,7 @@ class App extends Component {
               Close
             </Button>
             <Button variant="primary" onClick={this.handleClose}>
-              Save Changes
+              Done!
             </Button>
           </Modal.Footer>
         </Modal>
