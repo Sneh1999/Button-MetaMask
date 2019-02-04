@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { Fragment } from 'react'
 import Web3 from 'web3';
-import isLoginMetaMask from './components/isLoginMetaMask'
+import MyComponent from './MyComponent'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal'
 import './App.css';
@@ -69,17 +69,13 @@ class App extends Component {
           isDesiredNetwork:false,
           isLogin:false
         })
+        
       }
-      else{
-        // this.setState({isLoginMetaMask:false,
-        //   isMetaMask: false,
-        //   isDesiredNetwork:false,
-        //   isLogin:false
-        // })
-        // this.network()
-      }
-    
+      console.log('Hello')
+      
     })
+
+   
   }
   network(){
     let web3;
@@ -122,36 +118,23 @@ class App extends Component {
   render() {
     let content;
     if(this.state.isMetaMask){
-      content = <Fragment>
-      <p>We see that you dont have MetaMask installed ,please install it using this link
-        <br />
-      <a href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en" target="_blank">Download MetaMask</a>
-      </p>
-      
-    </Fragment>
+      content = <MyComponent tag='boo'></MyComponent>
 
     }
     if(this.state.isLoginMetaMask){
-      content = <Fragment>
-      <p>Login In bro!
-      </p>
-    </Fragment>
+      content = <MyComponent tag='foo'>
+      </MyComponent>
+     
     }
     if(this.state.isDesiredNetwork){
-      content = <Fragment>
-      <p>Connect to the right network
-        <br />
-      </p>
-    </Fragment>
+      content = <MyComponent tag='coo'>
+
+      </MyComponent>
     }
     if(this.state.isLogin){
-      content = <Fragment>
-      <p>Login in into your account
-        <br />
-      </p>
-    </Fragment>
+      content = <MyComponent tag='doo' ></MyComponent>
     }
-    // console.log(content)
+    
     return (
       <>
         <Button variant="primary" onClick={this.handleShow}>

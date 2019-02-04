@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Web3 from 'web3';
 
 
-export default class isLoginMetaMask extends Component{
+export default class isDesiredNetwork extends Component{
 
     constructor(props){
         super(props)
@@ -12,11 +12,9 @@ export default class isLoginMetaMask extends Component{
     render(){
         return(
             <div>
-                <p>Login into MetaMask
-            <br />
-          
-           
-          </p>
+              <p>Connect to the right network
+        <br />
+      </p>
             </div>
           
         )
