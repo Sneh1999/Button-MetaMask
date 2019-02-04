@@ -31,6 +31,7 @@ class App extends Component {
     };
   }
 
+    
     mount(){
     if (typeof web3 !== 'undefined') {
       // If a web3 instance is already provided by Meta Mask.
@@ -38,8 +39,9 @@ class App extends Component {
      
     } else {
       // Specify default instance if no web3 instance provided
-   
+     
       this.setState({ isMetaMask: true });
+
     }
    
   }
@@ -52,14 +54,32 @@ class App extends Component {
       const accounts = await window.ethereum.enable()
       this.setState({isDesiredNetwork:true})
       this.network()
-      // You now have an array of accounts!
-      // Currently only ever one:
-      // ['0xFDEa65C8e26263F6d9A1B5de9555D2931A33b825']
+    
     } catch (error) {
-      // Handle error. Likely the user rejected the login:
+      
       this.setState({isLoginMetaMask:true})
       
     }
+    window.ethereum.on('accountsChanged',(accounts) => {
+      console.log(accounts)
+      if(accounts.length===1){
+        console.log('hi')
+        this.setState({isLoginMetaMask:true,
+          isMetaMask: false,
+          isDesiredNetwork:false,
+          isLogin:false
+        })
+      }
+      else{
+        // this.setState({isLoginMetaMask:false,
+        //   isMetaMask: false,
+        //   isDesiredNetwork:false,
+        //   isLogin:false
+        // })
+        // this.network()
+      }
+    
+    })
   }
   network(){
     let web3;
@@ -90,6 +110,7 @@ class App extends Component {
 
 
   handleClose() {
+    window.location.reload();
     this.setState({ show: false });
   }
 
@@ -106,11 +127,15 @@ class App extends Component {
         <br />
       <a href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en" target="_blank">Download MetaMask</a>
       </p>
+      
     </Fragment>
 
     }
     if(this.state.isLoginMetaMask){
-      content = <isLoginMetaMask />
+      content = <Fragment>
+      <p>Login In bro!
+      </p>
+    </Fragment>
     }
     if(this.state.isDesiredNetwork){
       content = <Fragment>
