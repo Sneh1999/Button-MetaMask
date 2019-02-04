@@ -12,7 +12,7 @@ export default class isDesiredNetwork extends Component{
     render(){
         return(
             <div>
-              <p>Connect to the right network
+              <p>Connect to  ropsten network
         <br />
       </p>
             </div>

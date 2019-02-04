@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react';
 import { Fragment } from 'react'
+import { MetaMaskButton } from 'rimble-ui'
 import Web3 from 'web3';
 import MyComponent from './MyComponent'
 import Button from 'react-bootstrap/Button';
@@ -137,9 +138,9 @@ class App extends Component {
     
     return (
       <>
-        <Button variant="primary" onClick={this.handleShow}>
-            Connect With MetaMask
-        </Button>
+       
+        <MetaMaskButton mb={3} onClick={this.handleShow}>Connect with MetaMask</MetaMaskButton>
+
 
         <Modal show={this.state.show} onHide={this.handleClose}>
           <Modal.Header closeButton>
@@ -147,6 +148,7 @@ class App extends Component {
           </Modal.Header>
           <Modal.Body>{content}</Modal.Body>
           <Modal.Footer>
+
             <Button variant="secondary" onClick={this.handleClose}>
               Close
             </Button>
