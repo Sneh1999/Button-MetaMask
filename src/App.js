@@ -21,7 +21,6 @@ class App extends Component {
 
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
-    this.handleClick = this.handleClick.bind(this);
     this.network = this.network.bind(this)
     this.mount = this.mount.bind(this)
 
@@ -109,10 +108,7 @@ class App extends Component {
     
    
   }
-  handleClick(e){
-    e.preventDefault();
-    this.init()
-  }
+  
   async init(){
     try {
       const accounts = await window.ethereum.enable()
