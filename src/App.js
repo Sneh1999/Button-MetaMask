@@ -8,9 +8,11 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal'
 import './App.css';
 import { resolve } from 'url';
+import { actionTypes } from 'react-redux-form';
 var detect = require('detect-browser').detect
 
 var isMobile;
+
 
 class App extends Component {
 
@@ -28,11 +30,22 @@ class App extends Component {
 
     this.state = {
       show: false,
+      install:false,
       isMetaMask: false,
       isLoginMetaMask:false,
       isDesiredNetwork:false,
       isLogin:false
     };
+  }
+  componentWillMount(){
+      if(typeof web3 !== 'undefined'){
+        this.state.install = false;
+      }
+      else{
+        this.state.install = true;
+      }
+      console.log('hello')
+      console.log(this.state.install)
   }
 
     
@@ -79,11 +92,7 @@ class App extends Component {
               
               break
             
-             
-  
-            
-        
-          }
+           }
 
         }
        
@@ -91,7 +100,7 @@ class App extends Component {
 
         
 
-        console.log(isMobile)
+        
         
       }
       
@@ -118,8 +127,7 @@ class App extends Component {
     }
     window.ethereum.on('accountsChanged',(accounts) => {
       console.log(accounts)
-      if(accounts.length===1){
-        console.log('hi')
+      if(accounts.length===1){ console.log('hi')
         this.setState({isLoginMetaMask:true,
           isMetaMask: false,
           isDesiredNetwork:false,
@@ -127,7 +135,7 @@ class App extends Component {
         })
         
       }
-      console.log('Hello')
+    
       
     })
 
@@ -155,7 +163,7 @@ class App extends Component {
             
           
         
-}
+      }
 
     }
   
@@ -195,11 +203,12 @@ class App extends Component {
         Mobile coming soon!
       </Fragment>
     }
+    console.log(this.state.install)
     
     return (
       <>
        
-        <MetaMaskButton mb={3} onClick={this.handleShow}>Connect with MetaMask</MetaMaskButton>
+        <MetaMaskButton mb={3} onClick={this.handleShow}>{this.state.install?"Install MetaMask":"Connect with MetaMask"}</MetaMaskButton>
 
 
         <Modal show={this.state.show} onHide={this.handleClose}>

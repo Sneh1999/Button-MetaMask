@@ -12,7 +12,7 @@ export default class Login extends Component{
     render(){
         return(
             <div>
-              <p>Sign in into your account now
+              <p>Signed in with MetaMask!
         <br />
       </p>
             </div>
