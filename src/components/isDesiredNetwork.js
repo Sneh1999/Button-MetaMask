@@ -1,41 +1,45 @@
 import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
-import Web3 from 'web3';
 import image from '../Ropsten.png'
 
 
-export default class isDesiredNetwork extends Component{
+export default class isDesiredNetwork extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props)
-        this.state={
-            image:'',
-            clicked:true
+        this.state = {
+            image: '',
+            clicked: true,
+            description: ''
         }
         this.handleClick = this.handleClick.bind(this)
     }
 
-    handleClick(e){
+    handleClick(e) {
         e.preventDefault();
-        this.setState({clicked:!this.state.clicked})
-        if(this.state.clicked){
-            this.state.image =  <img  src={image}  alt="fireSpot"/>
+        this.setState({ clicked: !this.state.clicked })
+        if (this.state.clicked) {
+            this.state.image = <img src={image} height="300" width="450 " alt="fireSpot" />
+            this.state.description = 'Go to the network\'s dropdown and Select Ropsten network'
         }
-        else{
-            this.state.image=''
+        else {
+            this.state.image = ''
+            this.state.description = ''
         }
-       
-        console.log('hello')
+
+
     }
-    
-    render(){
-        return(
+
+    render() {
+        return (
             <div>
-                <Button onClick={(e)=>this.handleClick(e)}> Connect To Ropsten Network</Button>
-                <br/>
+                <Button onClick={(e) => this.handleClick(e)}> Connect To Ropsten Network</Button>
+                <br />
                 {this.state.image}
-               </div>
-          
+                <br />
+                {this.state.description}
+            </div>
+
         )
     }
 }

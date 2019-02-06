@@ -6,13 +6,13 @@ import Login from './components/Login'
 
 class MyComponent extends Component {
     components = {
-        foo: isLoginMetaMask,
-        boo:isMetaMask,
-        coo:isDesiredNetwork,
-        doo:Login
+        b: isLoginMetaMask,
+        a:isMetaMask,
+        c:isDesiredNetwork,
+        d:Login
     };
     render() {
-       const TagName = this.components[this.props.tag || 'foo'];
+       const TagName = this.components[this.props.tag || 'a'];
        return <TagName />
     }
 }
