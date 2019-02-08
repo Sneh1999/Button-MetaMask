@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import { Fragment } from 'react'
 import { MetaMaskButton } from 'rimble-ui'
@@ -36,13 +35,11 @@ class App extends Component {
   }
   componentWillMount() {
 
-
-    // Checking if Web3 has been injected by the browser (Mist/MetaMask)
     if (typeof web3 !== 'undefined') {
-      // Use Mist/MetaMask's provider
+    
       this.state.install = false;
       window.ethereum.on('networkChanged', (accounts) => {
-
+       
         if (accounts === "3") {
           this.setState({
             isLogin: true,
@@ -71,16 +68,16 @@ class App extends Component {
 
 
     if (typeof web3 !== 'undefined') {
-      // If a web3 instance is already provided by Meta Mask.
+     
       this.setState({ isMetaMask: false })
       this.init()
 
     } else {
-      // Specify default instance if no web3 instance provided
+     
 
       const browser = detect()
 
-      // Touch the web3 object to trigger Brave install prompt
+     
 
       isMobile = !!detectMobile()
 
@@ -145,7 +142,7 @@ class App extends Component {
 
     }
     window.ethereum.on('accountsChanged', (accounts) => {
-
+     
       if (accounts.length === 1) {
         this.setState({
           isLoginMetaMask: true,
@@ -174,16 +171,16 @@ class App extends Component {
   }
 
   network() {
-
+    
 
     // If a web3 instance is already provided by Meta Mask.
     if (window.ethereum.networkVersion === "3") {
       this.setState({ isLogin: true })
     } else {
 
-
+      
       window.ethereum.on('networkChanged', (accounts) => {
-
+        
         if (accounts === "3") {
           this.setState({
             isLogin: true,
@@ -245,7 +242,7 @@ class App extends Component {
         Mobile coming soon!
       </Fragment>
     }
-
+   
 
     return (
       <>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
 import image from '../Ropsten.png'
+import Web3 from 'web3';
 
 
 export default class isDesiredNetwork extends Component {

@@ -1,8 +1,8 @@
 {
-  "name": "React MetaMask Login Button",
+  "name": "Button-MetaMask",
   "version": "0.1.0",
-  "private": true,
-  "homepage": "https://Sneh1999.github.io/Button-MetaMask/",
+  "private": false,
+  "homepage": "https://Sneh1999.github.io/Button-MetaMask",
   "dependencies": {
     "bootstrap": "^4.2.1",
     "detect-browser": "^4.0.4",
@@ -10,8 +10,6 @@
     "react": "^16.7.0",
     "react-bootstrap": "^1.0.0-beta.5",
     "react-dom": "^16.7.0",
-    "react-redux": "^6.0.0",
-    "react-redux-form": "^1.16.12",
     "react-scripts": "2.1.3",
     "redux": "^4.0.1",
     "rimble-ui": "^0.2.0",
