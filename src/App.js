@@ -19,7 +19,7 @@ class MetaMaskLoginButton extends Component {
     this.handleClose = this.handleClose.bind(this);
     this.network = this.network.bind(this);
     this.mount = this.mount.bind(this);
-
+    this.boarding = this.boarding.bind(this);
     this.init = this.init.bind(this);
     
 
@@ -62,24 +62,47 @@ class MetaMaskLoginButton extends Component {
     var countone = window.sessionStorage.getItem("countone");
     if(countone ==='1'){
       console.log('hello')
-      this.setState({ isMetaMask: true , show: true  });
+      this.setState({ show: true,isMetaMask: true});
     
-    }
-    setInterval(() => {
-      var count = window.sessionStorage.getItem("count");
-      console.log(count);
-      if (typeof web3 !== "undefined") {
-        if (window.web3.eth.accounts[0]) {
-          if (count !== "1") {
-            window.open("http://fwd.metamask.io/");
-            console.log("hello");
+  
+    console.log(this.state.show)
+   
+      setInterval(() => {
+        var count = window.sessionStorage.getItem("count");
+        console.log(count);
+        if (typeof web3 !== "undefined") {
+          if (window.web3.eth.accounts[0]) {
+            if (count !== "1") {
+                sessionStorage.setItem("count", 1);
+            sessionStorage.setItem("countone", 0);
+            this.boarding()
+            }
+          
           }
-          sessionStorage.setItem("count", 1);
+        } else {
+          window.location.reload();
         }
-      } else {
-        window.location.reload();
-      }
-    }, 5000);
+      }, 5000);
+    }
+   
+   
+  }
+
+ async boarding(){
+  var promise1 = new Promise(function(resolve, reject) {
+    window.open("http://fwd.metamask.io/");
+    setTimeout(function() {
+     
+      window.open("http://localhost:3001/");
+    }, 10000);
+    resolve("done!")
+  });
+   
+   var wait = await promise1
+   
+   
+  
+    
   }
 
   mount() {
@@ -129,28 +152,13 @@ class MetaMaskLoginButton extends Component {
         }
       }
 
-      this.checkonboarding();
+      window.location.reload()
 
       this.setState({ isMetaMask: true });
     }
   }
 
-  checkonboarding() {
-    setInterval(() => {
-      if (typeof web3 !== "undefined") {
-        this.setState({
-          isRedirect: true
-        });
-      }
-    }, 2000);
-
-    if (this.state.isRedirect) {
-      window.open("http://fwd.metamask.io/", "_blank");
-      setTimeout(() => {
-        window.open("http://localhost:3000/");
-      }, 5000);
-    }
-  }
+ 
 
   async init() {
     try {
