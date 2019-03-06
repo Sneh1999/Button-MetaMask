@@ -1,7 +1,7 @@
 {
-  "name": "Button-MetaMask",
+  "name": "buttonmetamask",
   "version": "0.1.0",
-  "private": false,
+  "private": true,
   "homepage": "https://Sneh1999.github.io/Button-MetaMask",
   "dependencies": {
     "bootstrap": "^4.2.1",
